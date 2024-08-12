@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:whatsapps_ui/Screen/chatScreen.dart';
+import 'package:whatsapps_ui/widget/popupbuttom/homepagePopUpButtom.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -18,9 +19,9 @@ class _HomescreenState extends State<Homescreen> {
           onPressed: () {},
           backgroundColor: const Color(0xff02590F),
           foregroundColor: Colors.white,
-          child: const Icon(Icons.message),
           elevation: 0,
           shape: const CircleBorder(),
+          child: const Icon(Icons.message),
         ),
         appBar: AppBar(
           title: const Text(
@@ -29,7 +30,7 @@ class _HomescreenState extends State<Homescreen> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 10),
               child: IconButton(
                 onPressed: () {},
                 icon: const Icon(
@@ -38,15 +39,9 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_vert,
-                color: Colors.white,
-              ),
-            ),
+            const HomePagePopUpButtom(),
             const SizedBox(
-              width: 20,
+              width: 10,
             )
           ],
           bottom: const TabBar(
@@ -61,7 +56,7 @@ class _HomescreenState extends State<Homescreen> {
                 icon: Icon(Icons.camera_alt_sharp),
               ),
               Tab(
-                text: 'Chats',
+                text: 'Chat',
               ),
               Tab(
                 text: 'Status',
@@ -72,12 +67,17 @@ class _HomescreenState extends State<Homescreen> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            Text('This is camera'),
-            Text('This is chat List'),
-            Text('This is Status section'),
-            Text('This is Calls section'),
+            const Text(
+              'This is camera',
+              style: TextStyle(color: Colors.black),
+            ),
+            chatScreen(),
+            const Text('This is Status section',
+                style: TextStyle(color: Colors.black)),
+            const Text('This is Calls section',
+                style: TextStyle(color: Colors.black)),
           ],
         ),
       ),

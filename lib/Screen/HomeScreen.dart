@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:whatsapps_ui/Screen/chatScreen.dart';
 import 'package:whatsapps_ui/widget/popupbuttom/homepagePopUpButtom.dart';
 
+import '../pages/ShowContactPage.dart';
+
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
 
@@ -16,7 +18,12 @@ class _HomescreenState extends State<Homescreen> {
       length: 4,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext context) {
+              return ShowContactPage();
+            }));
+          },
           backgroundColor: const Color(0xff02590F),
           foregroundColor: Colors.white,
           elevation: 0,

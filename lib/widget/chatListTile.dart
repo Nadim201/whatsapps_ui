@@ -27,29 +27,19 @@ class ChatList extends StatelessWidget {
         children: [
           ListTile(
             leading: CircleAvatar(
+              backgroundImage: NetworkImage(chatModel.profilePic),
               radius: 30,
               backgroundColor: Colors.green.shade400,
-              child: chatModel.isGroup
-                  ? const Icon(
-                      Icons.groups_2,
-                      color: Colors.white,
-                      size: 40,
-                    )
-                  : const Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: 40,
-                    ),
             ),
             title: Text(
-              chatModel.title,
+              chatModel.name,
               style: const TextStyle(fontSize: 20),
             ),
             trailing: Text(
               chatModel.time,
               style: const TextStyle(fontSize: 16),
             ),
-            subtitle: Text(chatModel.subtitle,
+            subtitle: Text(chatModel.message,
                 style: const TextStyle(fontSize: 16, color: Colors.black38)),
           ),
           const Divider()

@@ -22,11 +22,11 @@ void main() {
           bodySmall: GoogleFonts.openSans(fontSize: 14, color: Colors.black),
         ),
         bottomAppBarTheme: const BottomAppBarTheme(
-          color: Colors.white,
+          color: Colors.black,
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.black),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff02590F),
+          backgroundColor: Colors.white,
         ),
       ),
       home: const SplashScreen(),

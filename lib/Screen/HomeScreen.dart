@@ -12,82 +12,101 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  int selectedIndex = 0;
+
+  final List<Widget> pages = [
+    chatScreen(),
+    const Text('Unread Messages', style: TextStyle(color: Colors.black)),
+    const Text('Contacts', style: TextStyle(color: Colors.black)),
+    const Text('Groups', style: TextStyle(color: Colors.black)),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (BuildContext context) {
-              return ShowContactPage();
-            }));
-          },
-          backgroundColor: const Color(0xff02590F),
-          foregroundColor: Colors.white,
-          elevation: 0,
-          shape: const CircleBorder(),
-          child: const Icon(Icons.message),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const ShowContactPage();
+              },
+            ),
+          );
+        },
+        backgroundColor: const Color(0xFF25D366),
+        foregroundColor: Colors.white,
+        elevation: 0,
+        child: const Icon(Icons.add_comment),
+      ),
+      appBar: AppBar(
+        title: const Text(
+          'WhatsApp',
+          style:
+              TextStyle(color: Color(0xFF25D366), fontWeight: FontWeight.w400),
         ),
-        appBar: AppBar(
-          title: const Text(
-            'WhatsApp',
-            style: TextStyle(color: Colors.white),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.camera_alt_outlined,
+              color: Colors.black,
+            ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
+            ),
+          ),
+          const HomePagePopUpButtom(),
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(50),
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(
+                  4,
+                  (index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Chip(
+                          side: BorderSide.none,
+                          label: Text(
+                            ['All', 'Unread', 'Contacts', 'Group'][index],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: selectedIndex == index
+                                    ? Colors.black
+                                    : Colors.black),
+                          ),
+                          backgroundColor: selectedIndex == index
+                              ? Colors.green.shade100
+                              : Colors.grey[300],
+                          elevation: selectedIndex == index ? 4 : 0,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-            const HomePagePopUpButtom(),
-            const SizedBox(
-              width: 10,
-            )
-          ],
-          bottom: const TabBar(
-            unselectedLabelColor: Colors.white70,
-            labelColor: Colors.white,
-            indicatorColor: Colors.white,
-            indicatorSize: TabBarIndicatorSize.tab,
-            unselectedLabelStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            tabs: [
-              Tab(
-                icon: Icon(Icons.camera_alt_sharp),
-              ),
-              Tab(
-                text: 'Chat',
-              ),
-              Tab(
-                text: 'Status',
-              ),
-              Tab(
-                text: 'Calls',
-              ),
-            ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            const Text(
-              'This is camera',
-              style: TextStyle(color: Colors.black),
-            ),
-            chatScreen(),
-            const Text('This is Status section',
-                style: TextStyle(color: Colors.black)),
-            const Text('This is Calls section',
-                style: TextStyle(color: Colors.black)),
-          ],
-        ),
       ),
+      body: pages[selectedIndex],
     );
   }
 }

@@ -25,24 +25,26 @@ class ChatList extends StatelessWidget {
       },
       child: Column(
         children: [
-          ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(chatModel.profilePic),
-              radius: 30,
-              backgroundColor: Colors.green.shade400,
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(chatModel.profilePic),
+                radius: 28,
+                backgroundColor: Colors.green.shade400,
+              ),
+              title: Text(
+                chatModel.name,
+                style: const TextStyle(fontSize: 20),
+              ),
+              trailing: Text(
+                chatModel.time,
+                style: const TextStyle(fontSize: 16),
+              ),
+              subtitle: Text(chatModel.message,
+                  style: const TextStyle(fontSize: 16, color: Colors.black38)),
             ),
-            title: Text(
-              chatModel.name,
-              style: const TextStyle(fontSize: 20),
-            ),
-            trailing: Text(
-              chatModel.time,
-              style: const TextStyle(fontSize: 16),
-            ),
-            subtitle: Text(chatModel.message,
-                style: const TextStyle(fontSize: 16, color: Colors.black38)),
           ),
-          const Divider()
         ],
       ),
     );

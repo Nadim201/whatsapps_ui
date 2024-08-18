@@ -1,18 +1,19 @@
 import '../widget/info.dart';
 
 class ChatModel {
-  String name;
-  String message;
-  String profilePic;
-  String time;
-  bool isGroup;
+  final String name;
+  final String message;
+  final String time;
+  final String profilePic;
+  bool select;
 
-  ChatModel(
-      {required this.name,
-      required this.message,
-      required this.profilePic,
-      required this.time,
-      required this.isGroup});
+  ChatModel({
+    required this.name,
+    required this.message,
+    required this.time,
+    required this.profilePic,
+    this.select = false, // Default value for select
+  });
 }
 
 final List<ChatModel> chatModels = info.map((item) {
@@ -21,6 +22,14 @@ final List<ChatModel> chatModels = info.map((item) {
     message: item['message'] as String,
     time: item['time'] as String,
     profilePic: item['profilePic'] as String,
-    isGroup: true,
+  );
+}).toList();
+
+final List<ChatModel> createGroupModel = perinfo.map((item) {
+  return ChatModel(
+    name: item['name'] as String,
+    message: item['message'] as String,
+    time: item['time'] as String,
+    profilePic: item['profilePic'] as String,
   );
 }).toList();

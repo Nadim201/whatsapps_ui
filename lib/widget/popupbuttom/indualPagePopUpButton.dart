@@ -6,7 +6,7 @@ class IndualPagePopUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-      iconColor: Colors.white,
+      iconColor: Colors.black,
       onSelected: (value) {
         print(value);
       },

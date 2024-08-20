@@ -23,9 +23,9 @@ class Avatarcard extends StatelessWidget {
                 right: 4,
                 child: CircleAvatar(
                   radius: 10,
-                  backgroundColor: Colors.teal,
+                  backgroundColor: Colors.blueGrey,
                   child: Icon(
-                    Icons.check,
+                    Icons.close,
                     color: Colors.white,
                     size: 14,
                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapps_ui/Screen/chatScreen.dart';
+import 'package:whatsapps_ui/pages/statusPage.dart';
 import 'package:whatsapps_ui/widget/popupbuttom/homepagePopUpButtom.dart';
+import 'package:whatsapps_ui/widget/statusScreen/headerSection.dart';
 
 import '../pages/ShowContactPage.dart';
 
@@ -16,7 +18,7 @@ class _HomescreenState extends State<Homescreen> {
 
   final List<Widget> pages = [
     chatScreen(),
-    const Text('Unread Messages', style: TextStyle(color: Colors.black)),
+    UnreadChatsScreen(),
     const Text('Contacts', style: TextStyle(color: Colors.black)),
     const Text('Groups', style: TextStyle(color: Colors.black)),
   ];
@@ -24,22 +26,6 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return const ShowContactPage();
-              },
-            ),
-          );
-        },
-        backgroundColor: const Color(0xFF25D366),
-        foregroundColor: Colors.white,
-        elevation: 0,
-        child: const Icon(Icons.add_comment),
-      ),
       appBar: AppBar(
         title: const Text(
           'WhatsApp',
@@ -85,7 +71,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: Chip(
                           side: BorderSide.none,
                           label: Text(
-                            ['All', 'Unread', 'Contacts', 'Group'][index],
+                            ['All', 'Unread', 'Favourites', 'Groups'][index],
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: selectedIndex == index

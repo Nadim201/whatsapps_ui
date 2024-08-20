@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapps_ui/model/chatModel.dart';
-
+import 'package:whatsapps_ui/widget/avatarCard.dart';
 import '../widget/createGroupContact.dart';
 import '../widget/info.dart';
 
@@ -52,7 +52,7 @@ class _CreategroupState extends State<CreateGroup> {
       body: Stack(
         children: [
           ListView.builder(
-            itemCount: info.length,
+            itemCount: perinfo.length,
             itemBuilder: (context, index) {
               // Initialize contact with select status
               final contact = ChatModel(
@@ -67,13 +67,13 @@ class _CreategroupState extends State<CreateGroup> {
               return InkWell(
                 onTap: () {
                   setState(() {
-                    if (contact.select == false) {
+                    if (!contact.select) {
                       contact.select = true;
                       groups.add(contact);
                     } else {
                       contact.select = false;
                       groups.removeWhere(
-                          (element) => element.name == contact.name);
+                              (element) => element.name == contact.name);
                     }
                   });
                 },
@@ -81,6 +81,42 @@ class _CreategroupState extends State<CreateGroup> {
               );
             },
           ),
+          if (groups.isNotEmpty)
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: 70,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: groups.length,
+                      itemBuilder: (context, index) {
+                        final selectedContact = groups[index];
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedContact.select = false;
+                              groups.removeWhere(
+                                      (element) => element.name == selectedContact.name);
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Avatarcard(
+                              contact: selectedContact,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                const Divider(),
+              ],
+            ),
         ],
       ),
     );
